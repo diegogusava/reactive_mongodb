@@ -3,14 +3,19 @@
 # ~~~~
 
 # Home page
-GET         /                    controllers.Application.index
+GET         /                           controllers.Application.index
 
 # Users
-GET         /users               controllers.Application.list
-GET         /users/:login        controllers.Application.find(login)
-POST        /users               controllers.Application.insert
-PUT         /users               controllers.Application.update
-DELETE      /users/:login        controllers.Application.delete(login)
+#List users
+GET         /users                      controllers.admin.UserAdminController.index()
+#Create new user
+GET         /users/new                  controllers.admin.UserAdminController.create()
+POST        /users                      controllers.admin.UserAdminController.insert()
+#Edit existing user
+GET         /users/:login               controllers.admin.UserAdminController.edit(login)
+POST        /users/:login               controllers.admin.UserAdminController.update(login)
+#Delete
+GET         /users/:login/delete        controllers.admin.UserAdminController.delete(login)
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.at(path="/public", file)
+GET         /assets/*file               controllers.Assets.at(path="/public", file)

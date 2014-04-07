@@ -1,2 +1,13 @@
 Play framework + Reactive MongoDB
 
+Packages that are automatically imported<br/>
+models._ (your models)<br/>
+controllers._ (your controllers)<br/>
+play.api.i18n._ (internationalization)<br/>
+play.api.mvc._ (makes MVC components available)<br/>
+play.api.data._ (tools for dealing with forms and validation)<br/>
+views.%format%._ (if you are writing html, %format% is replaced by html)<br/><br/>
+
+Working with strings: StringOps (scala.collection.immutable.StringOps)<br/>
+user.name.capitalize
+<br/><br/>

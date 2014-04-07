@@ -1,0 +1,16 @@
+new=New
+login=Login
+name=Name
+email=Email
+delete=Delete
+save=Save
+success_message=Operation performed successfully
+error_message=An error has occurred
+not_found=Not Found
+list.user=List User
+edit.user=Edit User
+no=No
+yes=Yes
+password=Password
+active=Active
+password_is_required=Password is Required

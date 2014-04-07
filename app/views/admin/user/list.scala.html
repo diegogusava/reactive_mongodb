@@ -1,0 +1,54 @@
+@(users:Seq[User])(implicit flash: Flash)
+
+@main("Users"){
+
+    <div class="page-header">
+        <h1>@Messages("list.user")</h1>
+    </div>
+
+    @utils.messages(None,flash)
+
+    <a href="@controllers.admin.routes.UserAdminController.create()" type="button" class="btn btn-default">@Messages("new")</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @Messages("login")
+                </td>
+                <td>
+                    @Messages("name")
+                </td>
+                <td>
+                    @Messages("email")
+                </td>
+                <td>
+                    @Messages("active")
+                </td>
+                <td></td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for((user,index) <- users.zipWithIndex){
+              <tr>
+                  <td>
+                      @(index + 1)
+                  </td>
+                  <td>
+                      <a href="@controllers.admin.routes.UserAdminController.edit(user.login)">@user.login</a>
+                  </td>
+                  <td>@user.name</td>
+                  <td>@user.email</td>
+                  <td>@if(user.active){ @Messages("yes") }else{ @Messages("no") }</td>
+                  <td>
+                    <a href="@controllers.admin.routes.UserAdminController.delete(user.login)">@Messages("delete")</a>
+                  </td>
+              </tr>
+            }
+        </tbody>
+
+    </table>
+}

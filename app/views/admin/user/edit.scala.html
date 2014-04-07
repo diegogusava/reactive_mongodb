@@ -1,0 +1,55 @@
+@(login: Option[String], elementForm: Form[User])(implicit flash: Flash)
+
+@action = @{
+    login match {
+        case Some(login) => controllers.admin.routes.UserAdminController.update(login)
+        case None => controllers.admin.routes.UserAdminController.insert()
+    }
+}
+
+@main(Messages("user.edit")) {
+
+    <div class="page-header">
+        <h1>@Messages("edit.user")</h1>
+    </div>
+
+    @utils.messages(Some(elementForm),flash)
+
+    <form role="form" action="@action" method="post">
+        <div class="form-group @if(elementForm("login").hasErrors) {has-warning}">
+            <label for="email">@Messages("login")</label>
+            <input name="@elementForm("login").name" type="text" class="form-control" id="@elementForm("login").id" value="@elementForm("login").value">
+            @if(elementForm("login").hasErrors){
+                <span class="help-inline">@elementForm("login").errors.map(x => Messages(x.message))</span>
+            }
+        </div>
+        <div class="form-group @if(elementForm("name").hasErrors) {has-warning}">
+            <label for="email">@Messages("name")</label>
+            <input name="@elementForm("name").name" type="text" class="form-control" id="@elementForm("name").id" value="@elementForm("name").value">
+            @if(elementForm("name").hasErrors){
+                <span class="help-inline">@elementForm("name").errors.map(x => Messages(x.message))</span>
+            }
+        </div>
+        <div class="form-group @if(elementForm("email").hasErrors) {has-warning}">
+            <label for="email">@Messages("email")</label>
+            <input name="@elementForm("email").name" type="email" class="form-control" id="@elementForm("email").id" value="@elementForm("email").value">
+            @if(elementForm("email").hasErrors){
+                <span class="help-inline">@elementForm("email").errors.map(x => Messages(x.message))</span>
+            }
+        </div>
+        <div class="form-group @if(elementForm("password").hasErrors) {has-warning}">
+            <label for="email">@Messages("password")</label>
+            <input name="@elementForm("password").name" type="password" class="form-control" id="@elementForm("password").id" value="@elementForm("password").value">
+            @if(elementForm("password").hasErrors){
+                <span class="help-inline">@elementForm("password").errors.map(x => Messages(x.message))</span>
+            }
+        </div>
+        <div class="checkbox">
+            <label>
+                <input id="@elementForm("active").id" name="@elementForm("active").name" type="checkbox" value="true" @if(elementForm("active").value == Some("true")){checked}>Active
+            </label>
+        </div>
+        <button type="submit" class="btn btn-default">@Messages("save")</button>
+    </form>
+
+}

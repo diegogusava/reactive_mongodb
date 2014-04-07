@@ -1,0 +1,16 @@
+@(formOption: Option[Form[_]], flash: Flash)
+
+@formOption.map { form =>
+    @form.globalError.map { error =>
+        <div class="alert alert-danger"> @error.message </div>
+    }
+}
+
+@flash.get("error_message").map { message =>
+    <div class="alert alert-danger"> @message </div>
+}
+
+@flash.get("success_message").map { message =>
+    <div class="alert alert-success"> @message </div>
+}
+

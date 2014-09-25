@@ -11,7 +11,6 @@ import org.joda.time.DateTime
 import play.api.libs.Crypto
 import play.api.i18n.Messages
 import controllers._
-import controllers.routes
 import scala.Some
 import play.api.mvc.SimpleResult
 
@@ -19,7 +18,7 @@ object UserAdminController extends Controller {
 
   def dao = FactoryDAO.userDB
 
-  val Home: SimpleResult = Redirect(routes.UserAdminController.index())
+  val Home: Result = Redirect(routes.UserAdminController.index())
 
   val elementForm: Form[User] = Form(
     mapping(
@@ -42,13 +41,11 @@ object UserAdminController extends Controller {
       }
   }
 
-  def create() = Action.async {
-    implicit request =>
-      Future(Ok(views.html.admin.user.edit(None, elementForm)))
+  def create() = Action {
+    implicit request => Ok(views.html.admin.user.edit(None, elementForm))
   }
 
-  def insert() = Action.async {
-    implicit request =>
+  def insert() = Action.async { implicit request =>
       elementForm.bindFromRequest.fold(
         errors => {
           Future(BadRequest(views.html.admin.user.edit(None, errors)).flashing(ErrorMessage))
